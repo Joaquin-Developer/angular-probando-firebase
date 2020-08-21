@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+//import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-AppTareas';
+  items: Observable<any[]>;
+  constructor(public db: AngularFirestore) {
+    this.items = db.collection('list').valueChanges();
+  }
 }
+
